@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Barlow:wght@400;500;600;700&amp;family=Barlow+Semi+Condensed:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #0E0E0F; color: #F2EFE9; font-family: 'Barlow', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #F5B301; text-decoration: none; }
+  a:hover { color: #FFCB3A; }
+  ::selection { background: #F5B301; color: #0E0E0F; }
+  @keyframes onama-in-left { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes onama-in-down { from { opacity: 0; transform: translateY(-60px); } to { opacity: 1; transform: translateY(0); } }
+  .onama-reveal, .onama-drop { opacity: 0; }
+  .onama-reveal[data-in="1"] { animation: onama-in-left .75s cubic-bezier(.2,.7,.2,1) both; }
+  .onama-drop[data-in="1"] { animation: onama-in-down .75s cubic-bezier(.2,.7,.2,1) both; }
+  .onama-reveal.dly1[data-in="1"] { animation-delay: .14s; }
+  .onama-reveal.dly2[data-in="1"] { animation-delay: .28s; }
+  @media (max-width: 760px) {
+    .onama-hero-inner { flex-direction: column !important; align-items: stretch !important; gap: 28px !important; }
+    .onama-hero-img { flex: 0 0 auto !important; height: 220px !important; }
+    .onama-header-inner { flex-wrap: wrap; row-gap: 10px; }
+    .onama-hero { min-height: 320px !important; }
+    .onama-hero-inner { padding: 56px 24px !important; }
+    .onama-hero h1 { font-size: clamp(30px,9vw,44px) !important; }
+    .onama-t1 { font-size: 46px !important; }
+    .onama-t2 { font-size: 40px !important; }
+    .onama-story { padding: 56px 24px 40px !important; }
+    .onama-brojke { padding: 20px 24px 48px !important; }
+    .onama-values-inner { padding: 56px 24px !important; }
+    .onama-cta { padding: 60px 24px !important; }
+    .onama-cta a { width: 100%; justify-content: center; }
+    .onama-footer-row { flex-direction: column !important; align-items: flex-start !important; }
+  }
+  @media (max-width: 620px) {
+    section { padding-left: 20px !important; padding-right: 20px !important; }
+    .onama-header-inner { padding-left: 20px !important; padding-right: 20px !important; }
+  }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="max-width:100%;overflow-x:hidden;">
+
+  <!-- ============ TOP BAR ============ -->
+  <header style="position:sticky;top:0;z-index:50;background:rgba(14,14,15,0.92);backdrop-filter:blur(10px);border-bottom:1px solid #26292D;">
+    <div class="onama-header-inner" style="max-width:1240px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+      <a href="index.html" style="display:flex;align-items:center;gap:12px;color:#F2EFE9;">
+        <span style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:#F5B301;color:#0E0E0F;font-family:'Oswald';font-weight:700;font-size:24px;border-radius:6px;letter-spacing:-1px;">DŽ</span>
+        <span style="font-family:'Oswald';font-weight:600;font-size:22px;letter-spacing:2px;text-transform:uppercase;">DŽO <span style="color:#8A8C89;font-weight:400;font-size:13px;">MEHANIZACIJA</span></span>
+      </a>
+      <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;color:#C7C9C4;font-family:'Barlow Semi Condensed';font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:1px;">
+        <span style="font-size:18px;line-height:1;">←</span> Nazad na početnu
+      </a>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="onama-hero" style="position:relative;min-height:440px;display:flex;align-items:center;overflow:hidden;">
+    <div style="position:absolute;inset:0;">
+      <image-slot id="onama-hero" shape="rect" fit="cover" placeholder="Fotografija tima ili mašine na terenu" style="width:100%;height:100%;"></image-slot>
+    </div>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,14,15,0.96) 0%,rgba(14,14,15,0.8) 45%,rgba(14,14,15,0.4) 100%);pointer-events:none;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:10px;background:repeating-linear-gradient(45deg,#F5B301 0 22px,#0E0E0F 22px 44px);pointer-events:none;"></div>
+    <div class="onama-hero-inner" style="position:relative;max-width:1240px;margin:0 auto;padding:80px 32px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:32px;">
+      
+      <div class="onama-hero-text" style="flex:1 1 auto; min-width: 0;">
+        <div style="font-family:'Barlow Semi Condensed';color:#F5B301;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:15px;margin-bottom:14px;">O nama</div>
+        <h1 class="onama-reveal" style="font-family: 'Oswald'; font-weight: 700; font-size: clamp(38px,6vw,72px); text-transform: uppercase; margin: 0; letter-spacing: -1px; line-height: 1.02;"><span class="onama-t1" style="color: rgb(245, 179, 1); font-size: 89px">10 godina</span><br><span class="onama-t2" style="font-size: 0.8em;">na terenu Crne Gore</span></h1>
+      </div><div class="onama-hero-img" style="position:relative;flex:0 1 460px;min-width:0;height:400px;border-radius:14px;overflow:hidden;box-shadow:0 24px 50px rgba(0,0,0,0.55),0 8px 18px rgba(0,0,0,0.4);transition:transform .25s ease,box-shadow .25s ease;" style-hover="transform:translateY(-8px);box-shadow:0 34px 64px rgba(0,0,0,0.65),0 12px 24px rgba(0,0,0,0.5);">
+        <img src="uploads/onama-operater.png" alt="Operater pored buldožera u zalazak sunca" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div style="position:absolute;bottom:0;left:0;right:0;height:8px;background:repeating-linear-gradient(45deg,#F5B301 0 18px,#0E0E0F 18px 36px);"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRIČA ============ -->
+  <section class="onama-story" style="max-width:1000px;margin:0 auto;padding:88px 32px 64px;">
+    <p style="color:#F2EFE9;font-size:clamp(20px,2.4vw,26px);line-height:1.5;margin:0 0 28px;font-weight:500;">DŽO Mehanizacija je domaća firma za iznajmljivanje buldožera i zemljane radove sa sedištem u Budvi. Već više od deset godina radimo iskope, ravnanje terena, rasčišćavanje i rušenja duž cele obale.</p>
+    <p style="color:#C7C9C4;font-size:18px;line-height:1.7;margin:0 0 22px;">Počeli smo sa jednom mašinom i jasnim pravilom — doći na vreme, odraditi čisto i predati teren spreman za sledeću fazu. Danas raspolažemo flotom mašina različitih veličina, ali pravilo je ostalo isto.</p>
+    <p style="color:#A0A29F;font-size:18px;line-height:1.7;margin:0;">Poznajemo svaki teren, svaki prilaz i svaki rok na ovom području. Za sve mašine obezbeđujemo iskusnog operatera — vi samo kažete šta i gde, a mi rešavamo ostalo.</p>
+  </section>
+
+  <!-- ============ BROJKE ============ -->
+  <section class="onama-brojke" style="max-width:1240px;margin:0 auto;padding:24px 32px 64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;">
+    <div style="background:#131416;border:1px solid #26292D;border-radius:14px;padding:32px;box-shadow:inset 0 4px 18px rgba(0,0,0,0.85),inset 0 1px 3px rgba(0,0,0,0.9);">
+      <div style="font-family:'Oswald';font-weight:700;font-size:52px;color:#F5B301;line-height:1;">10+</div>
+      <div style="color:#C7C9C4;font-size:16px;margin-top:10px;">godina iskustva</div>
+    </div>
+    <div style="background:#131416;border:1px solid #26292D;border-radius:14px;padding:32px;box-shadow:inset 0 4px 18px rgba(0,0,0,0.85),inset 0 1px 3px rgba(0,0,0,0.9);">
+      <div style="font-family:'Oswald';font-weight:700;font-size:52px;color:#F5B301;line-height:1;">500+</div>
+      <div style="color:#C7C9C4;font-size:16px;margin-top:10px;">završenih terena</div>
+    </div>
+    <div style="background:#131416;border:1px solid #26292D;border-radius:14px;padding:32px;box-shadow:inset 0 4px 18px rgba(0,0,0,0.85),inset 0 1px 3px rgba(0,0,0,0.9);">
+      <div style="font-family:'Oswald';font-weight:700;font-size:52px;color:#F5B301;line-height:1;">24h</div>
+      <div style="color:#C7C9C4;font-size:16px;margin-top:10px;">dogovor i izlazak</div>
+    </div>
+  </section>
+
+  <!-- ============ VREDNOSTI ============ -->
+  <section style="background:#131416;border-top:1px solid #26292D;border-bottom:1px solid #26292D;">
+    <div class="onama-values-inner" style="max-width:1240px;margin:0 auto;padding:80px 32px;">
+      <h2 class="onama-reveal" style="font-family:'Oswald';font-weight:700;font-size:clamp(28px,3.4vw,42px);text-transform:uppercase;margin:0 0 40px;letter-spacing:-0.5px;">Kako radimo</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;">
+        <div class="onama-reveal">
+          <div style="font-family:'Oswald';font-weight:700;font-size:22px;color:#F5B301;margin-bottom:12px;">Na vreme</div>
+          <p style="color:#A0A29F;font-size:17px;line-height:1.6;margin:0;">Dolazimo kad kažemo. Termin i dolazak na teren dogovaramo unapred, bez čekanja.</p>
+        </div>
+        <div class="onama-reveal dly1">
+          <div style="font-family:'Oswald';font-weight:700;font-size:22px;color:#F5B301;margin-bottom:12px;">Čisto i precizno</div>
+          <p style="color:#A0A29F;font-size:17px;line-height:1.6;margin:0;">Radimo uredno i predajemo teren spreman za sledeću fazu — bez nedovršenih detalja.</p>
+        </div>
+        <div class="onama-reveal dly2">
+          <div style="font-family:'Oswald';font-weight:700;font-size:22px;color:#F5B301;margin-bottom:12px;">Iskusan operater</div>
+          <p style="color:#A0A29F;font-size:17px;line-height:1.6;margin:0;">Uz svaku mašinu ide operater koji poznaje teren i radi sigurno u svim uslovima.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="onama-cta" style="max-width:1000px;margin:0 auto;padding:88px 32px;">
+    <div style="background:#17181A;border:1px solid #2A2D31;border-radius:14px;padding:48px 40px;box-shadow:inset 0 4px 18px rgba(0,0,0,0.85),inset 0 1px 3px rgba(0,0,0,0.9);text-align:center;">
+      <div style="font-family:'Barlow Semi Condensed';color:#F5B301;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:15px;margin-bottom:12px;">Kontakt</div>
+      <h2 class="onama-drop" style="font-family:'Oswald';font-weight:700;font-size:clamp(30px,4vw,48px);text-transform:uppercase;margin:0 0 16px;letter-spacing:-0.5px;">Treba ti mašina na terenu?</h2>
+      <p style="color:#A0A29F;font-size:18px;line-height:1.6;margin:0 0 32px;">Javi se — dogovaramo termin i dolazak odmah.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;">
+        <a href="tel:+38267123456" style="display:inline-flex;align-items:center;gap:10px;background:#F5B301;color:#0E0E0F;padding:16px 30px;border-radius:8px;font-family:'Oswald';font-weight:600;font-size:17px;text-transform:uppercase;letter-spacing:0.5px;" style-hover="background:#FFCB3A;box-shadow:inset 0 2px 10px rgba(0,0,0,0.7),inset 0 1px 2px rgba(0,0,0,0.85);"><span style="font-size:20px;">📞</span> Pozovi +382 67 123 456</a>
+        <a href="index.html#kontakt" style="display:inline-flex;align-items:center;gap:10px;background:transparent;border:1px solid #3A3D42;color:#F2EFE9;padding:16px 30px;border-radius:8px;font-family:'Oswald';font-weight:600;font-size:17px;text-transform:uppercase;letter-spacing:0.5px;" style-hover="border-color:#F5B301;box-shadow:inset 0 2px 10px rgba(0,0,0,0.7),inset 0 1px 2px rgba(0,0,0,0.85);">Pošalji upit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ZEMLJA (full-bleed) ============ -->
+  <div aria-hidden="true" style="width:100%;height:clamp(90px,12vw,220px);background-image:url('uploads/zemlja-bg-v2.png');background-repeat:no-repeat;background-position:bottom center;background-size:cover;pointer-events:none;"></div>
+
+  <!-- ============ ŽUTO-CRNA LINIJA ============ -->
+  <div aria-hidden="true" style="height:10px;background:repeating-linear-gradient(45deg,#F5B301 0 22px,#0E0E0F 22px 44px);"></div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="onama-footer-row" style="max-width:1240px;margin:0 auto;padding:40px 32px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:#F5B301;color:#0E0E0F;font-family:'Oswald';font-weight:700;font-size:22px;border-radius:6px;letter-spacing:-1px;">DŽ</span>
+        <span style="font-family:'Oswald';font-weight:600;font-size:20px;letter-spacing:2px;text-transform:uppercase;">DŽO Mehanizacija</span>
+      </div>
+      <div style="color:#8A8C89;font-size:14px;">Budva, Crna Gora · <a href="tel:+38267123456">+382 67 123 456</a></div>
+      <div style="color:#5E605D;font-size:13px;">© 2026 DŽO. Sva prava zadržana.</div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  componentDidMount() {
+    const reveal = (el) => el.setAttribute('data-in', '1');
+    const attach = () => {
+      const els = document.querySelectorAll('.onama-reveal, .onama-drop');
+      if (!els.length) { this._raf = requestAnimationFrame(attach); return; }
+      if ('IntersectionObserver' in window) {
+        this._io = new IntersectionObserver((entries) => {
+          entries.forEach((en) => { if (en.isIntersecting) { reveal(en.target); this._io.unobserve(en.target); } });
+        }, { threshold: 0.15 });
+        els.forEach((e) => this._io.observe(e));
+      } else {
+        els.forEach(reveal);
+      }
+      // safety net: guarantee visibility even if observer never fires
+      this._fallback = setTimeout(() => els.forEach(reveal), 2000);
+    };
+    this._raf = requestAnimationFrame(attach);
+  }
+  componentWillUnmount() {
+    if (this._io) this._io.disconnect();
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (this._fallback) clearTimeout(this._fallback);
+  }
+  renderVals() { return {}; }
+}</script>
+</body>
+</html>

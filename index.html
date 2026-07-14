@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #0E0E0F; color: #F2EFE9; font-family: 'Barlow', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #F5B301; text-decoration: none; }
+  a:hover { color: #FFCB3A; }
+  ::selection { background: #F5B301; color: #0E0E0F; }
+  @keyframes dzo-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes dzo-in-right { from { opacity: 0; transform: translateX(70px); } to { opacity: 1; transform: translateX(0); } }
+  .dzo-reveal { opacity: 0; transform: translateX(70px); }
+  .dzo-reveal[data-in="1"] { animation: dzo-in-right .75s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes dzo-marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+  .dzo-rev-mask { overflow: hidden; }
+  .dzo-rev-track { display: flex; width: max-content; gap: 20px; animation: dzo-marquee-right 36s linear infinite; }
+  .dzo-rev-mask:hover .dzo-rev-track { animation-play-state: paused; }
+  .dzo-rev-card { flex: 0 0 380px; }
+  @media (max-width: 620px) { .dzo-rev-card { flex: 0 0 82vw; } }
+  .dzo-marquee-track { display: flex; width: max-content; animation: dzo-marquee 28s linear infinite; }
+  .dzo-marquee:hover .dzo-marquee-track { animation-play-state: paused; }
+  .dzo-burger { display: none; background: transparent; border: 1px solid #3A3D42; border-radius: 8px; width: 46px; height: 46px; cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 5px; padding: 0; }
+  .dzo-burger { transition: border-color .15s ease, background .15s ease; }
+  .dzo-burger:hover { border-color: #F5B301; background: rgba(245,179,1,0.1); }
+  .dzo-navlink { color: #C7C9C4; transition: color .15s ease, border-color .15s ease; }
+  .dzo-navlink:hover { color: #F5B301 !important; border-bottom-color: #F5B301 !important; }
+  .dzo-burger span { display: block; width: 22px; height: 2px; background: #F2EFE9; transition: transform .2s ease, opacity .2s ease; }
+  .dzo-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .dzo-burger.open span:nth-child(2) { opacity: 0; }
+  .dzo-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  @media (max-width: 900px) {
+    .dzo-header-inner { position: relative; }
+    .dzo-burger { display: flex; }
+    .dzo-nav { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column !important; align-items: stretch !important; background: #0E0E0F; border-bottom: 1px solid #26292D; padding: 16px 24px 22px !important; gap: 4px !important; display: none !important; box-shadow: 0 20px 34px rgba(0,0,0,0.55); }
+    .dzo-nav.open { display: flex !important; }
+    .dzo-nav > a:not([href^='tel']) { padding: 13px 4px !important; font-size: 16px !important; border-bottom: 1px solid #1C1E21; }
+    .dzo-nav > a[href^='tel'] { justify-content: center; margin-top: 12px; padding: 15px !important; font-size: 17px !important; }
+  }
+  @media (max-width: 620px) {
+    .dzo-header-inner { padding-left: 20px !important; padding-right: 20px !important; }
+    .dzo-logo-sub { display: none; }
+    section { padding-left: 20px !important; padding-right: 20px !important; }
+    .dzo-hero-inner { padding-left: 20px !important; padding-right: 20px !important; }
+    .dzo-hero-phone { padding: 18px 22px !important; width: 100% !important; justify-content: center !important; font-size: 21px !important; }
+    .dzo-hero-phone-txt { flex-direction: column !important; align-items: center !important; gap: 4px !important; line-height: 1.3 !important; }
+  }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="max-width:100%;overflow-x:hidden;">
+
+  <!-- ============ TOP BAR ============ -->
+  <header style="position:sticky;top:0;z-index:50;background:rgba(14,14,15,0.92);backdrop-filter:blur(10px);border-bottom:1px solid #26292D;">
+    <div class="dzo-header-inner" style="max-width:1240px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+      <a href="#top" style="display:flex;align-items:center;gap:12px;color:#F2EFE9;">
+        <span style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:#F5B301;color:#0E0E0F;font-family:'Oswald';font-weight:700;font-size:24px;border-radius:6px;letter-spacing:-1px;">DŽ</span>
+        <span style="font-family:'Oswald';font-weight:600;font-size:22px;letter-spacing:2px;text-transform:uppercase;">{{ companyName }} <span class="dzo-logo-sub" style="color:#8A8C89;font-weight:400;font-size:13px;">MEHANIZACIJA</span></span>
+      </a>
+      <button class="dzo-burger {{ menuClass }}" onClick="{{ toggleMenu }}" aria-label="Meni"><span></span><span></span><span></span></button>
+      <nav class="dzo-nav {{ menuClass }}" style="display:flex;align-items:center;gap:28px;">
+        <a href="#cenovnik" onClick="{{ closeMenu }}" class="dzo-navlink" style="color:#C7C9C4;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:1px;padding-bottom:4px;border-bottom:2px solid transparent;">Cenovnik</a>
+        <a href="#masine" onClick="{{ closeMenu }}" class="dzo-navlink" style="color:#C7C9C4;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:1px;padding-bottom:4px;border-bottom:2px solid transparent;">Mašine</a>
+        <a href="#onama" onClick="{{ closeMenu }}" class="dzo-navlink" style="color:#C7C9C4;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:1px;padding-bottom:4px;border-bottom:2px solid transparent;">O nama</a>
+        <a href="#kontakt" onClick="{{ closeMenu }}" class="dzo-navlink" style="color:#C7C9C4;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:1px;padding-bottom:4px;border-bottom:2px solid transparent;">Kontakt</a>
+        <a href="tel:{{ phoneTel }}" style="display:flex;align-items:center;gap:8px;background:#F5B301;color:#0E0E0F;padding:11px 18px;border-radius:6px;font-family:'Oswald';font-weight:600;font-size:15px;letter-spacing:0.5px;" style-hover="background:#FFCB3A;">
+          <span style="font-size:17px;">📞</span> {{ phone }}
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" class="dzo-hero-wrap" style="position:relative;min-height:640px;display:flex;align-items:center;overflow:hidden;">
+    <div style="position:absolute;inset:0;">
+      <img src="uploads/hero-bg.png" alt="Buldožer u radu u sumrak" style="width:100%;height:100%;object-fit:cover;display:block;">
+    </div>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,14,15,0.96) 0%,rgba(14,14,15,0.82) 45%,rgba(14,14,15,0.35) 100%);pointer-events:none;"></div>
+    <sc-if value="{{ showStripes }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute;top:0;left:0;right:0;height:10px;background:repeating-linear-gradient(45deg,#F5B301 0 22px,#0E0E0F 22px 44px);pointer-events:none;"></div>
+    </sc-if>
+
+    <div class="dzo-hero-inner" style="position:relative;max-width:1240px;margin:0 auto;padding:80px 32px;width:100%;">
+      <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(245,179,1,0.14);border:1px solid rgba(245,179,1,0.4);color:#F5B301;padding:7px 14px;border-radius:100px;font-family:'Barlow Semi Condensed';font-weight:600;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px;">
+        <span style="width:8px;height:8px;background:#F5B301;border-radius:50%;"></span> Budva i okolina · dostupno danas
+      </div>
+      <h1 style="font-family:'Oswald';font-weight:700;font-size:clamp(44px,6vw,84px);line-height:1.12;text-transform:uppercase;margin:0 0 20px;max-width:15ch;letter-spacing:-1px;animation:dzo-in-right .75s cubic-bezier(.2,.7,.2,1) both;">
+        Iznajmljivanje <span style="color:#F5B301;">buldožera</span> na sat ili dan
+      </h1>
+      <p style="font-size:20px;line-height:1.5;color:#C7C9C4;max-width:52ch;margin:0 0 36px;">
+        Snažna mašina, iskusan operater i dostava na teren. Rasčišćavanje, ravnanje, iskop i priprema terena — bez čekanja.
+      </p>
+
+      <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:40px;">
+        <div style="background:#141517;border:1px solid #2A2D31;border-radius:10px;padding:18px 24px;min-width:180px;box-shadow:inset 0 3px 14px rgba(0,0,0,0.85),inset 0 1px 2px rgba(0,0,0,0.9);">
+          <div style="font-family:'Barlow Semi Condensed';text-transform:uppercase;letter-spacing:1px;color:#8A8C89;font-size:13px;font-weight:600;">Mali buldožer</div>
+          <div style="font-family:'Oswald';font-weight:700;font-size:38px;color:#F5B301;line-height:1;margin-top:4px;">2.000 <span style="font-size:18px;color:#F2EFE9;">din / sat</span></div>
+        </div>
+        <div style="background:#141517;border:1px solid #2A2D31;border-radius:10px;padding:18px 24px;min-width:180px;box-shadow:inset 0 3px 14px rgba(0,0,0,0.85),inset 0 1px 2px rgba(0,0,0,0.9);">
+          <div style="font-family:'Barlow Semi Condensed';text-transform:uppercase;letter-spacing:1px;color:#8A8C89;font-size:13px;font-weight:600;">Veliki buldožer</div>
+          <div style="font-family:'Oswald';font-weight:700;font-size:38px;color:#F5B301;line-height:1;margin-top:4px;">15.000 <span style="font-size:18px;color:#F2EFE9;">din / dan</span></div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;">
+        <a href="tel:{{ phoneTel }}" class="dzo-hero-phone" style="display:inline-flex;align-items:center;gap:10px;background:#F5B301;color:#0E0E0F;padding:16px 30px;border-radius:8px;font-family:'Oswald';font-weight:600;font-size:19px;letter-spacing:0.5px;transition:background .18s ease,box-shadow .18s ease;" style-hover="background:#FFCB3A;box-shadow:inset 0 4px 14px rgba(0,0,0,0.4),inset 0 2px 5px rgba(0,0,0,0.3);">
+          <span style="font-size:20px;">📞</span>
+          <span class="dzo-hero-phone-txt" style="display:inline-flex;align-items:center;gap:6px;"><span>Pozovi</span><span style="white-space:nowrap;">{{ phone }}</span></span>
+        </a>
+        <a href="#kontakt" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#F2EFE9;padding:16px 28px;border-radius:8px;border:1px solid #3A3D42;font-family:'Oswald';font-weight:600;font-size:19px;letter-spacing:0.5px;transition:border-color .18s ease,color .18s ease,box-shadow .18s ease;" style-hover="border-color:#F5B301;color:#F5B301;box-shadow:inset 0 4px 14px rgba(0,0,0,0.55),inset 0 2px 5px rgba(0,0,0,0.4);">
+          Pošalji upit →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST BAR ============ -->
+  <div class="dzo-marquee" style="background:#F5B301;color:#0E0E0F;overflow:hidden;position:relative;z-index:10;box-shadow:0 -18px 30px 4px rgba(0,0,0,0.85),0 18px 30px 4px rgba(0,0,0,0.85);">
+    <div class="dzo-marquee-track">
+      <div style="display:flex;align-items:center;padding:20px 0;">
+        <div style="display:flex;align-items:center;gap:12px;padding:0 40px;"><span style="font-family:'Oswald';font-weight:700;font-size:30px;">10+</span><span style="font-family:'Barlow Semi Condensed';font-weight:600;text-transform:uppercase;letter-spacing:1px;line-height:1.1;">godina<br>iskustva</span></div>
+        <span style="opacity:0.4;">◆</span>
+        <div style="display:flex;align-items:center;gap:12px;padding:0 40px;"><span style="font-family:'Oswald';font-weight:700;font-size:30px;">24h</span><span style="font-family:'Barlow Semi Condensed';font-weight:600;text-transform:uppercase;letter-spacing:1px;line-height:1.1;">dostava<br>na teren</span></div>
+        <span style="opacity:0.4;">◆</span>
+        <div style="display:flex;align-items:center;gap:12px;padding:0 40px;"><span style="font-family:'Oswald';font-weight:700;font-size:30px;">500+</span><span style="font-family:'Barlow Semi Condensed';font-weight:600;text-transform:uppercase;letter-spacing:1px;line-height:1.1;">završenih<br>poslova</span></div>
+        <span style="opacity:0.4;">◆</span>
+        <div style="display:flex;align-items:center;gap:12px;padding:0 40px;"><span style="font-family:'Oswald';font-weight:700;font-size:30px;">★ 4.9</span><span style="font-family:'Barlow Semi Condensed';font-weight:600;text-transform:uppercase;letter-spacing:1px;line-height:1.1;">ocena<br>klijenata</span></div>
+        <span style="opacity:0.4;">◆</span>
+      </div>
+      <div style="display:flex;align-items:center;padding:20px 0;" aria-hidden="true">
+        <div style="display:flex;align-items:center;gap:12px;padding:0 40px;"><span style="font-family:'Oswald';font-weight:700;font-size:30px;">10+</span><span style="font-family:'Barlow Semi Condensed';font-weight:600;text-transform:uppercase;letter-spacing:1px;line-height:1.1;">godina<br>iskustva</span></div>
+        <span style="opacity:0.4;">◆</span>
+        <div style="display:flex;align-items:center;gap:12px;padding:0 40px;"><span style="font-family:'Oswald';font-weight:700;font-size:30px;">24h</span><span style="font-family:'Barlow Semi Condensed';font-weight:600;text-transform:uppercase;letter-spacing:1px;line-height:1.1;">dostava<br>na teren</span></div>
+        <span style="opacity:0.4;">◆</span>
+        <div style="display:flex;align-items:center;gap:12px;padding:0 40px;"><span style="font-family:'Oswald';font-weight:700;font-size:30px;">500+</span><span style="font-family:'Barlow Semi Condensed';font-weight:600;text-transform:uppercase;letter-spacing:1px;line-height:1.1;">završenih<br>poslova</span></div>
+        <span style="opacity:0.4;">◆</span>
+        <div style="display:flex;align-items:center;gap:12px;padding:0 40px;"><span style="font-family:'Oswald';font-weight:700;font-size:30px;">★ 4.9</span><span style="font-family:'Barlow Semi Condensed';font-weight:600;text-transform:uppercase;letter-spacing:1px;line-height:1.1;">ocena<br>klijenata</span></div>
+        <span style="opacity:0.4;">◆</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CENOVNIK ============ -->
+  <section id="cenovnik" style="max-width:1240px;margin:0 auto;padding:96px 32px;">
+    <div style="font-family:'Barlow Semi Condensed';color:#F5B301;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:15px;margin-bottom:12px;">Cenovnik</div>
+    <h2 class="dzo-reveal" style="font-family:'Oswald';font-weight:700;font-size:clamp(34px,4vw,52px);text-transform:uppercase;margin:0 0 12px;letter-spacing:-0.5px;">Jasne cene, bez skrivenih troškova</h2>
+    <p style="color:#A0A29F;font-size:18px;max-width:60ch;margin:0 0 44px;">Cena uključuje operatera i gorivo. Dostava se obračunava po kilometru od Budve. Za duže angažmane odobravamo popust.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;">
+      <!-- card 1 -->
+      <div style="background:#17181A;border:1px solid #2A2D31;border-radius:14px;padding:32px;display:flex;flex-direction:column;box-shadow:inset 0 4px 18px rgba(0,0,0,0.85),inset 0 1px 3px rgba(0,0,0,0.9);">
+        <h3 style="font-family:'Oswald';font-weight:600;font-size:26px;text-transform:uppercase;margin:0 0 6px;">Mali buldožer</h3>
+        <p style="color:#8A8C89;margin:0 0 24px;font-size:15px;">Uske parcele, dvorišta, vrtovi i sitni iskopi.</p>
+        <div style="font-family:'Oswald';font-weight:700;font-size:48px;color:#F5B301;line-height:1;">2.000 <span style="font-size:20px;color:#F2EFE9;">din/sat</span></div>
+        <div style="color:#8A8C89;font-size:14px;margin-top:6px;">ili 12.000 din/dan</div>
+        <ul style="list-style:none;padding:0;margin:24px 0 28px;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;gap:10px;color:#C7C9C4;"><span style="color:#F5B301;font-weight:700;">✓</span> Operater uključen</li>
+          <li style="display:flex;gap:10px;color:#C7C9C4;"><span style="color:#F5B301;font-weight:700;">✓</span> Gorivo uključeno</li>
+          <li style="display:flex;gap:10px;color:#C7C9C4;"><span style="color:#F5B301;font-weight:700;">✓</span> Min. angažman 2 sata</li>
+        </ul>
+        <a href="tel:{{ phoneTel }}" style="display:block;text-align:center;margin-top:auto;background:transparent;border:1px solid #3A3D42;color:#F2EFE9;padding:14px;border-radius:8px;font-family:'Oswald';font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:1px;transition:transform .15s ease,border-color .15s ease,color .15s ease,box-shadow .15s ease;" style-hover="border-color:#F5B301;color:#F5B301;transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,0.45);">Rezerviši</a>
+      </div>
+      <!-- card 2 highlighted -->
+      <div style="background:#1C1A12;border:2px solid #F5B301;border-radius:14px;padding:32px;position:relative;display:flex;flex-direction:column;box-shadow:inset 0 4px 18px rgba(0,0,0,0.85),inset 0 1px 3px rgba(0,0,0,0.9);">
+        <span style="position:absolute;top:-13px;left:32px;background:#F5B301;color:#0E0E0F;font-family:'Barlow Semi Condensed';font-weight:700;text-transform:uppercase;letter-spacing:1px;font-size:13px;padding:5px 12px;border-radius:5px;">Najtraženije</span>
+        <h3 style="font-family:'Oswald';font-weight:600;font-size:26px;text-transform:uppercase;margin:0 0 6px;">Veliki buldožer</h3>
+        <p style="color:#B7A87A;margin:0 0 24px;font-size:15px;">Veliki tereni, ravnanje puteva, ozbiljni iskopi.</p>
+        <div style="font-family:'Oswald';font-weight:700;font-size:48px;color:#F5B301;line-height:1;">15.000 <span style="font-size:20px;color:#F2EFE9;">din/dan</span></div>
+        <div style="color:#B7A87A;font-size:14px;margin-top:6px;">ili 2.400 din/sat</div>
+        <ul style="list-style:none;padding:0;margin:24px 0 28px;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;gap:10px;color:#E8E2CE;"><span style="color:#F5B301;font-weight:700;">✓</span> Operater uključen</li>
+          <li style="display:flex;gap:10px;color:#E8E2CE;"><span style="color:#F5B301;font-weight:700;">✓</span> Gorivo uključeno</li>
+          <li style="display:flex;gap:10px;color:#E8E2CE;"><span style="color:#F5B301;font-weight:700;">✓</span> Popust za 3+ dana</li>
+        </ul>
+        <a href="tel:{{ phoneTel }}" style="display:block;text-align:center;margin-top:auto;background:#F5B301;color:#0E0E0F;padding:14px;border-radius:8px;font-family:'Oswald';font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:1px;transition:transform .15s ease,background .15s ease,box-shadow .15s ease;" style-hover="background:#FFCB3A;transform:translateY(-3px);box-shadow:0 10px 26px rgba(245,179,1,0.35);">Rezerviši</a>
+      </div>
+      <!-- card 3 -->
+      <div style="background:#17181A;border:1px solid #2A2D31;border-radius:14px;padding:32px;display:flex;flex-direction:column;box-shadow:inset 0 4px 18px rgba(0,0,0,0.85),inset 0 1px 3px rgba(0,0,0,0.9);">
+        <h3 style="font-family:'Oswald';font-weight:600;font-size:26px;text-transform:uppercase;margin:0 0 6px;">Projekat po dogovoru</h3>
+        <p style="color:#8A8C89;margin:0 0 24px;font-size:15px;">Kompletna priprema terena od početka do kraja.</p>
+        <div style="font-family:'Oswald';font-weight:700;font-size:48px;color:#F5B301;line-height:1;">Ponuda</div>
+        <div style="color:#8A8C89;font-size:14px;margin-top:6px;">na osnovu obilaska terena</div>
+        <ul style="list-style:none;padding:0;margin:24px 0 28px;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;gap:10px;color:#C7C9C4;"><span style="color:#F5B301;font-weight:700;">✓</span> Besplatan izlazak na teren</li>
+          <li style="display:flex;gap:10px;color:#C7C9C4;"><span style="color:#F5B301;font-weight:700;">✓</span> Fiksna cena unapred</li>
+          <li style="display:flex;gap:10px;color:#C7C9C4;"><span style="color:#F5B301;font-weight:700;">✓</span> Više mašina po potrebi</li>
+        </ul>
+        <a href="#kontakt" style="display:block;text-align:center;margin-top:auto;background:transparent;border:1px solid #3A3D42;color:#F2EFE9;padding:14px;border-radius:8px;font-family:'Oswald';font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:1px;transition:transform .15s ease,border-color .15s ease,color .15s ease,box-shadow .15s ease;" style-hover="border-color:#F5B301;color:#F5B301;transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,0.45);">Traži ponudu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAŠINE / GALERIJA ============ -->
+  <section id="masine" style="background:#131416;border-top:1px solid #26292D;border-bottom:1px solid #26292D;">
+    <div style="max-width:1240px;margin:0 auto;padding:96px 32px;">
+      <div style="font-family:'Barlow Semi Condensed';color:#F5B301;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:15px;margin-bottom:12px;">Naše mašine</div>
+      <h2 class="dzo-reveal" style="font-family:'Oswald';font-weight:700;font-size:clamp(34px,4vw,52px);text-transform:uppercase;margin:0 0 44px;letter-spacing:-0.5px;">Održavana i spremna flota</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;">
+        <div style="border-radius:12px;overflow:hidden;background:#0E0E0F;border:1px solid #2A2D31;box-shadow:0 16px 34px rgba(0,0,0,0.5),0 4px 10px rgba(0,0,0,0.4);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;" style-hover="transform:translateY(-8px);border-color:#F5B301;box-shadow:0 26px 50px rgba(0,0,0,0.6),0 10px 20px rgba(0,0,0,0.5);">
+          <div style="height:220px;"><img src="uploads/mali-buldozer.png" alt="Mali buldožer" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          <div style="padding:18px 20px;"><div style="font-family:'Oswald';font-weight:600;font-size:20px;text-transform:uppercase;">Mali buldožer</div><div style="color:#8A8C89;font-size:14px;margin-top:2px;">Gusenice · do 5 t · uski prilazi</div></div>
+        </div>
+        <div style="border-radius:12px;overflow:hidden;background:#0E0E0F;border:1px solid #2A2D31;box-shadow:0 16px 34px rgba(0,0,0,0.5),0 4px 10px rgba(0,0,0,0.4);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;" style-hover="transform:translateY(-8px);border-color:#F5B301;box-shadow:0 26px 50px rgba(0,0,0,0.6),0 10px 20px rgba(0,0,0,0.5);">
+          <div style="height:220px;"><img src="uploads/veliki-buldozer.png" alt="Veliki buldožer" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          <div style="padding:18px 20px;"><div style="font-family:'Oswald';font-weight:600;font-size:20px;text-transform:uppercase;">Veliki buldožer</div><div style="color:#8A8C89;font-size:14px;margin-top:2px;">Gusenice · 15+ t · teški tereni</div></div>
+        </div>
+        <div style="border-radius:12px;overflow:hidden;background:#0E0E0F;border:1px solid #2A2D31;box-shadow:0 16px 34px rgba(0,0,0,0.5),0 4px 10px rgba(0,0,0,0.4);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;" style-hover="transform:translateY(-8px);border-color:#F5B301;box-shadow:0 26px 50px rgba(0,0,0,0.6),0 10px 20px rgba(0,0,0,0.5);">
+          <div style="height:220px;"><img src="uploads/ravnanje-terena.png" alt="Ravnanje terena" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          <div style="padding:18px 20px;"><div style="font-family:'Oswald';font-weight:600;font-size:20px;text-transform:uppercase;">Ravnanje terena</div><div style="color:#8A8C89;font-size:14px;margin-top:2px;">Priprema za temelj i pristupni put</div></div>
+        </div>
+        <div style="border-radius:12px;overflow:hidden;background:#0E0E0F;border:1px solid #2A2D31;box-shadow:0 16px 34px rgba(0,0,0,0.5),0 4px 10px rgba(0,0,0,0.4);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;" style-hover="transform:translateY(-8px);border-color:#F5B301;box-shadow:0 26px 50px rgba(0,0,0,0.6),0 10px 20px rgba(0,0,0,0.5);">
+          <div style="height:220px;"><img src="uploads/iskop-rusenje.png" alt="Iskop i rušenje" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          <div style="padding:18px 20px;"><div style="font-family:'Oswald';font-weight:600;font-size:20px;text-transform:uppercase;">Iskop i rušenje</div><div style="color:#8A8C89;font-size:14px;margin-top:2px;">Rasčišćavanje i uklanjanje materijala</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ O NAMA ============ -->
+  <section id="onama" style="max-width:1240px;margin:0 auto;padding:96px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:56px;align-items:center;">
+    <div>
+      <div style="font-family:'Barlow Semi Condensed';color:#F5B301;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:15px;margin-bottom:12px;">O nama</div>
+      <h2 class="dzo-reveal" style="font-family:'Oswald';font-weight:700;font-size:clamp(34px,4vw,52px);text-transform:uppercase;margin:0 0 20px;letter-spacing:-0.5px;">Domaća firma sa terenom u malom prstu</h2>
+      <p style="color:#C7C9C4;font-size:18px;line-height:1.6;margin:0 0 18px;">{{ companyName }} već više od deset godina radi zemljane radove na području Budve i cele obale. Znamo svaki teren, svaki prilaz i svaki rok.</p>
+      <p style="color:#A0A29F;font-size:17px;line-height:1.6;margin:0 0 28px;">Dolazimo na vreme, radimo čisto i predajemo teren spreman za sledeću fazu. Za sve mašine obezbeđujemo iskusnog operatera — vi samo kažete šta i gde.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;">
+        <span style="background:#17181A;border:1px solid #2A2D31;padding:10px 16px;border-radius:100px;font-family:'Barlow Semi Condensed';font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:14px;">Iskop</span>
+        <span style="background:#17181A;border:1px solid #2A2D31;padding:10px 16px;border-radius:100px;font-family:'Barlow Semi Condensed';font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:14px;">Ravnanje</span>
+        <span style="background:#17181A;border:1px solid #2A2D31;padding:10px 16px;border-radius:100px;font-family:'Barlow Semi Condensed';font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:14px;">Rasčišćavanje</span>
+        <span style="background:#17181A;border:1px solid #2A2D31;padding:10px 16px;border-radius:100px;font-family:'Barlow Semi Condensed';font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:14px;">Rušenje</span>
+      </div>
+      <a href="o-nama.html" style="display:inline-flex;align-items:center;gap:10px;margin-top:28px;background:#F5B301;color:#0E0E0F;padding:14px 26px;border-radius:6px;font-family:'Oswald';font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:1px;transition:background .15s ease,transform .15s ease;" style-hover="background:#FFCB3A;transform:translateY(-2px);box-shadow:inset 0 2px 10px rgba(0,0,0,0.7),inset 0 1px 2px rgba(0,0,0,0.85);">Saznaj više o nama
+        <span style="font-size:18px;line-height:1;">→</span>
+      </a>
+    </div>
+    <div style="position:relative;border-radius:14px;overflow:hidden;height:420px;box-shadow:0 24px 50px rgba(0,0,0,0.55),0 8px 18px rgba(0,0,0,0.4);transition:transform .25s ease,box-shadow .25s ease;" style-hover="transform:translateY(-8px);box-shadow:0 34px 64px rgba(0,0,0,0.65),0 12px 24px rgba(0,0,0,0.5);">
+      <img src="uploads/o-nama.png" alt="Operater na terenu" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <sc-if value="{{ showStripes }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute;bottom:0;left:0;right:0;height:8px;background:repeating-linear-gradient(45deg,#F5B301 0 18px,#0E0E0F 18px 36px);"></div>
+      </sc-if>
+    </div>
+  </section>
+
+  <!-- ============ RECENZIJE ============ -->
+  <section style="background:#131416;border-top:1px solid #26292D;border-bottom:1px solid #26292D;">
+    <div style="max-width:1240px;margin:0 auto;padding:96px 32px;">
+      <div style="font-family:'Barlow Semi Condensed';color:#F5B301;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:15px;margin-bottom:12px;">Recenzije</div>
+      <h2 class="dzo-reveal" style="font-family:'Oswald';font-weight:700;font-size:clamp(34px,4vw,52px);text-transform:uppercase;margin:0 0 44px;letter-spacing:-0.5px;">Šta kažu klijenti</h2>
+      <div class="dzo-rev-mask" style="margin:0 -32px;padding:0 32px;">
+        <div class="dzo-rev-track">
+          <div class="dzo-rev-card" style="background:#0E0E0F;border:1px solid #2A2D31;border-radius:12px;padding:28px;box-shadow:inset 0 4px 18px rgba(0,0,0,0.9),inset 0 1px 3px rgba(0,0,0,0.95);">
+            <div style="color:#F5B301;font-size:18px;margin-bottom:14px;">★★★★★</div>
+            <p style="color:#D6D8D3;font-size:17px;line-height:1.6;margin:0 0 20px;">„Zvao ujutru, buldožer na terenu do podne. Dvorište i prilaz sređeni za jedan dan. Preporuka."</p>
+            <div style="font-family:'Oswald';font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Marko P. <span style="color:#8A8C89;font-weight:400;font-family:'Barlow';text-transform:none;letter-spacing:0;">· Budva</span></div>
+          </div>
+          <div class="dzo-rev-card" style="background:#0E0E0F;border:1px solid #2A2D31;border-radius:12px;padding:28px;box-shadow:inset 0 4px 18px rgba(0,0,0,0.9),inset 0 1px 3px rgba(0,0,0,0.95);">
+            <div style="color:#F5B301;font-size:18px;margin-bottom:14px;">★★★★★</div>
+            <p style="color:#D6D8D3;font-size:17px;line-height:1.6;margin:0 0 20px;">„Ravnali su nam plac za kuću. Operater zna posao, sve po dogovoru i bez naknadnih troškova."</p>
+            <div style="font-family:'Oswald';font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Jelena i Nikola <span style="color:#8A8C89;font-weight:400;font-family:'Barlow';text-transform:none;letter-spacing:0;">· Petrovac</span></div>
+          </div>
+          <div class="dzo-rev-card" style="background:#0E0E0F;border:1px solid #2A2D31;border-radius:12px;padding:28px;box-shadow:inset 0 4px 18px rgba(0,0,0,0.9),inset 0 1px 3px rgba(0,0,0,0.95);">
+            <div style="color:#F5B301;font-size:18px;margin-bottom:14px;">★★★★★</div>
+            <p style="color:#D6D8D3;font-size:17px;line-height:1.6;margin:0 0 20px;">„Iznajmljivali smo na dan za veći projekat. Mašina jaka, ekipa ozbiljna. Rok ispoštovan u minut."</p>
+            <div style="font-family:'Oswald';font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Građevinska „Kula" <span style="color:#8A8C89;font-weight:400;font-family:'Barlow';text-transform:none;letter-spacing:0;">· Bar</span></div>
+          </div>
+          <div class="dzo-rev-card" style="background:#0E0E0F;border:1px solid #2A2D31;border-radius:12px;padding:28px;box-shadow:inset 0 4px 18px rgba(0,0,0,0.9),inset 0 1px 3px rgba(0,0,0,0.95);">
+            <div style="color:#F5B301;font-size:18px;margin-bottom:14px;">★★★★★</div>
+            <p style="color:#D6D8D3;font-size:17px;line-height:1.6;margin:0 0 20px;">„Brzi i korektni. Iskopali temelj za vikendicu za pola dana, teren ostavili čist. Sve pohvale."</p>
+            <div style="font-family:'Oswald';font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Petar M. <span style="color:#8A8C89;font-weight:400;font-family:'Barlow';text-transform:none;letter-spacing:0;">· Tivat</span></div>
+          </div>
+          <div class="dzo-rev-card" aria-hidden="true" style="background:#0E0E0F;border:1px solid #2A2D31;border-radius:12px;padding:28px;box-shadow:inset 0 4px 18px rgba(0,0,0,0.9),inset 0 1px 3px rgba(0,0,0,0.95);">
+            <div style="color:#F5B301;font-size:18px;margin-bottom:14px;">★★★★★</div>
+            <p style="color:#D6D8D3;font-size:17px;line-height:1.6;margin:0 0 20px;">„Zvao ujutru, buldožer na terenu do podne. Dvorište i prilaz sređeni za jedan dan. Preporuka."</p>
+            <div style="font-family:'Oswald';font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Marko P. <span style="color:#8A8C89;font-weight:400;font-family:'Barlow';text-transform:none;letter-spacing:0;">· Budva</span></div>
+          </div>
+          <div class="dzo-rev-card" aria-hidden="true" style="background:#0E0E0F;border:1px solid #2A2D31;border-radius:12px;padding:28px;box-shadow:inset 0 4px 18px rgba(0,0,0,0.9),inset 0 1px 3px rgba(0,0,0,0.95);">
+            <div style="color:#F5B301;font-size:18px;margin-bottom:14px;">★★★★★</div>
+            <p style="color:#D6D8D3;font-size:17px;line-height:1.6;margin:0 0 20px;">„Ravnali su nam plac za kuću. Operater zna posao, sve po dogovoru i bez naknadnih troškova."</p>
+            <div style="font-family:'Oswald';font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Jelena i Nikola <span style="color:#8A8C89;font-weight:400;font-family:'Barlow';text-transform:none;letter-spacing:0;">· Petrovac</span></div>
+          </div>
+          <div class="dzo-rev-card" aria-hidden="true" style="background:#0E0E0F;border:1px solid #2A2D31;border-radius:12px;padding:28px;box-shadow:inset 0 4px 18px rgba(0,0,0,0.9),inset 0 1px 3px rgba(0,0,0,0.95);">
+            <div style="color:#F5B301;font-size:18px;margin-bottom:14px;">★★★★★</div>
+            <p style="color:#D6D8D3;font-size:17px;line-height:1.6;margin:0 0 20px;">„Iznajmljivali smo na dan za veći projekat. Mašina jaka, ekipa ozbiljna. Rok ispoštovan u minut."</p>
+            <div style="font-family:'Oswald';font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Građevinska „Kula" <span style="color:#8A8C89;font-weight:400;font-family:'Barlow';text-transform:none;letter-spacing:0;">· Bar</span></div>
+          </div>
+          <div class="dzo-rev-card" aria-hidden="true" style="background:#0E0E0F;border:1px solid #2A2D31;border-radius:12px;padding:28px;box-shadow:inset 0 4px 18px rgba(0,0,0,0.9),inset 0 1px 3px rgba(0,0,0,0.95);">
+            <div style="color:#F5B301;font-size:18px;margin-bottom:14px;">★★★★★</div>
+            <p style="color:#D6D8D3;font-size:17px;line-height:1.6;margin:0 0 20px;">„Brzi i korektni. Iskopali temelj za vikendicu za pola dana, teren ostavili čist. Sve pohvale."</p>
+            <div style="font-family:'Oswald';font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Petar M. <span style="color:#8A8C89;font-weight:400;font-family:'Barlow';text-transform:none;letter-spacing:0;">· Tivat</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KONTAKT ============ -->
+  <section id="kontakt" style="position:relative;max-width:1240px;margin:0 auto;padding:96px 32px clamp(120px,14vw,260px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;">
+    <div aria-hidden="true" style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100vw;height:clamp(110px,14vw,260px);background-image:url('uploads/zemlja-bg-v2.png');background-repeat:no-repeat;background-position:bottom center;background-size:cover;pointer-events:none;"></div>
+    <div>
+      <div style="font-family:'Barlow Semi Condensed';color:#F5B301;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:15px;margin-bottom:12px;">Kontakt</div>
+      <h2 class="dzo-reveal" style="font-family:'Oswald';font-weight:700;font-size:clamp(34px,4vw,52px);text-transform:uppercase;margin:0 0 20px;letter-spacing:-0.5px;">Rezerviši buldožer</h2>
+      <p style="color:#A0A29F;font-size:18px;line-height:1.6;margin:0 0 32px;">Najbrže je da pozoveš — javljamo se odmah i dogovaramo termin i dolazak na teren. Možeš i da pošalješ upit pa te mi zovemo.</p>
+
+      <a href="tel:{{ phoneTel }}" style="display:flex;align-items:center;gap:16px;background:#F5B301;color:#0E0E0F;padding:20px 24px;border-radius:12px;margin-bottom:16px;transition:background .18s ease,box-shadow .18s ease;" style-hover="background:#FFCB3A;box-shadow:inset 0 4px 14px rgba(0,0,0,0.4),inset 0 2px 5px rgba(0,0,0,0.3);">
+        <span style="font-size:28px;">📞</span>
+        <div><div style="font-family:'Barlow Semi Condensed';text-transform:uppercase;letter-spacing:1px;font-size:13px;font-weight:600;">Pozovi direktno</div><div style="font-family:'Oswald';font-weight:700;font-size:26px;line-height:1;">{{ phone }}</div></div>
+      </a>
+
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:24px;">
+        <div style="display:flex;align-items:center;gap:14px;color:#C7C9C4;"><span style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#17181A;border:1px solid #2A2D31;border-radius:8px;">📍</span><div><div style="font-weight:600;">Budva, Crna Gora</div><div style="color:#8A8C89;font-size:14px;">Pokrivamo celu obalu</div></div></div>
+        <div style="display:flex;align-items:center;gap:14px;color:#C7C9C4;"><span style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#17181A;border:1px solid #2A2D31;border-radius:8px;">🕘</span><div><div style="font-weight:600;">Pon – Sub, 07:00 – 19:00</div><div style="color:#8A8C89;font-size:14px;">Hitni pozivi i van radnog vremena</div></div></div>
+      </div>
+    </div>
+
+    <form onSubmit="{{ onSubmit }}" style="background:#17181A;border:1px solid #2A2D31;border-radius:14px;padding:32px;display:flex;flex-direction:column;gap:16px;box-shadow:inset 0 4px 18px rgba(0,0,0,0.85),inset 0 1px 3px rgba(0,0,0,0.9);">
+      <div style="font-family:'Oswald';font-weight:600;font-size:22px;text-transform:uppercase;">Pošalji upit</div>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:#A0A29F;font-weight:600;">Ime i prezime
+        <input type="text" placeholder="Vaše ime" style="background:#0E0E0F;border:1px solid #2A2D31;border-radius:8px;padding:13px 14px;color:#F2EFE9;font-family:'Barlow';font-size:16px;" style-focus="border-color:#F5B301;outline:none;">
+      </label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:#A0A29F;font-weight:600;">Telefon
+        <input type="tel" placeholder="06x xxx xxx" style="background:#0E0E0F;border:1px solid #2A2D31;border-radius:8px;padding:13px 14px;color:#F2EFE9;font-family:'Barlow';font-size:16px;" style-focus="border-color:#F5B301;outline:none;">
+      </label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:#A0A29F;font-weight:600;">Šta vam treba?
+        <textarea rows="4" placeholder="Vrsta posla, lokacija i željeni termin..." style="background:#0E0E0F;border:1px solid #2A2D31;border-radius:8px;padding:13px 14px;color:#F2EFE9;font-family:'Barlow';font-size:16px;resize:vertical;" style-focus="border-color:#F5B301;outline:none;"></textarea>
+      </label>
+      <button type="submit" style="background:#F5B301;color:#0E0E0F;border:none;padding:15px;border-radius:8px;font-family:'Oswald';font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:background .18s ease,box-shadow .18s ease;" style-hover="background:#FFCB3A;box-shadow:inset 0 4px 14px rgba(0,0,0,0.4),inset 0 2px 5px rgba(0,0,0,0.3);">Pošalji upit</button>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="color:#F5B301;font-weight:600;text-align:center;">Hvala! Javljamo se u najkraćem roku.</div>
+      </sc-if>
+    </form>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:#0A0A0B;border-top:1px solid #26292D;">
+    <sc-if value="{{ showStripes }}" hint-placeholder-val="{{ true }}">
+      <div style="height:8px;background:repeating-linear-gradient(45deg,#F5B301 0 20px,#0A0A0B 20px 40px);"></div>
+    </sc-if>
+    <div style="max-width:1240px;margin:0 auto;padding:40px 32px;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:#F5B301;color:#0E0E0F;font-family:'Oswald';font-weight:700;font-size:22px;border-radius:6px;">DŽ</span>
+        <span style="font-family:'Oswald';font-weight:600;font-size:20px;letter-spacing:2px;text-transform:uppercase;">{{ companyName }} Mehanizacija</span>
+      </div>
+      <div style="color:#8A8C89;font-size:14px;">Budva, Crna Gora · <a href="tel:{{ phoneTel }}">{{ phone }}</a></div>
+      <div style="color:#5E605D;font-size:13px;">© 2026 {{ companyName }}. Sva prava zadržana.</div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1240, &quot;height&quot;: 900 },
+  &quot;companyName&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;DŽO&quot;, &quot;tsType&quot;: &quot;string&quot; },
+  &quot;phone&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;+382 67 123 456&quot;, &quot;tsType&quot;: &quot;string&quot; },
+  &quot;showStripes&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot; }
+}">
+class Component extends DCLogic {
+  state = { sent: false, menuOpen: false };
+  componentDidMount() {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.setAttribute('data-in', '1'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.dzo-reveal').forEach((el) => io.observe(el));
+    this._io = io;
+  }
+  componentWillUnmount() { if (this._io) this._io.disconnect(); }
+  renderVals() {
+    const companyName = this.props.companyName ?? 'DŽO';
+    const phone = this.props.phone ?? '+382 67 123 456';
+    const phoneTel = '+' + phone.replace(/[^0-9]/g, '');
+    return {
+      companyName,
+      phone,
+      phoneTel,
+      showStripes: this.props.showStripes ?? true,
+      sent: this.state.sent,
+      menuClass: this.state.menuOpen ? 'open' : '',
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+    };
+  }
+}
+</script>
+</body>
+</html>
