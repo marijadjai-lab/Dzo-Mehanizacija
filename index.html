@@ -23,11 +23,14 @@
   .dzo-reveal { opacity: 0; transform: translateX(70px); }
   .dzo-reveal[data-in="1"] { animation: dzo-in-right .75s cubic-bezier(.2,.7,.2,1) both; }
   @keyframes dzo-marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-  .dzo-rev-mask { overflow: hidden; }
-  .dzo-rev-track { display: flex; width: max-content; gap: 20px; animation: dzo-marquee-right 36s linear infinite; }
-  .dzo-rev-mask:hover .dzo-rev-track { animation-play-state: paused; }
-  .dzo-rev-card { flex: 0 0 380px; }
-  @media (max-width: 620px) { .dzo-rev-card { flex: 0 0 82vw; } }
+  .dzo-rev-mask { overflow: hidden; position: relative; }
+  .dzo-rev-track { display: flex; width: max-content; gap: 20px; position: relative; will-change: transform; }
+  .dzo-rev-card { flex: 0 0 380px; transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s ease, opacity .45s ease; }
+  .dzo-rev-arrow { position: absolute; top: 50%; transform: translateY(-50%) scale(.85); width: 54px; height: 54px; border-radius: 50%; border: 1px solid #3A3D42; background: rgba(14,14,15,0.82); backdrop-filter: blur(6px); color: #F5B301; font-size: 26px; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease, background .15s ease, border-color .15s ease; z-index: 5; box-shadow: 0 10px 26px rgba(0,0,0,0.5); }
+  .dzo-rev-arrow:hover { background: #F5B301; color: #0E0E0F; border-color: #F5B301; }
+  .dzo-rev-arrow.dzo-rev-prev { left: 16px; }
+  .dzo-rev-arrow.dzo-rev-next { right: 16px; }
+  @media (max-width: 620px) { .dzo-rev-mask { touch-action: pan-y; width: 100vw; margin-left: calc(-50vw + 50%); } .dzo-rev-card { flex: 0 0 74vw; min-height: 300px; } .dzo-rev-arrow { width: 44px; height: 44px; font-size: 22px; } .dzo-rev-arrow.dzo-rev-prev { left: 10px; } .dzo-rev-arrow.dzo-rev-next { right: 10px; } }
   .dzo-marquee-track { display: flex; width: max-content; animation: dzo-marquee 28s linear infinite; }
   .dzo-marquee:hover .dzo-marquee-track { animation-play-state: paused; }
   .dzo-burger { display: none; background: transparent; border: 1px solid #3A3D42; border-radius: 8px; width: 46px; height: 46px; cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 5px; padding: 0; }
@@ -52,14 +55,26 @@
     .dzo-logo-sub { display: none; }
     section { padding-left: 20px !important; padding-right: 20px !important; }
     .dzo-hero-inner { padding-left: 20px !important; padding-right: 20px !important; }
-    .dzo-hero-phone { padding: 18px 22px !important; width: 100% !important; justify-content: center !important; font-size: 21px !important; }
-    .dzo-hero-phone-txt { flex-direction: column !important; align-items: center !important; gap: 4px !important; line-height: 1.3 !important; }
+    .dzo-hero-phone { padding: 18px 22px !important; width: 100% !important; justify-content: flex-start !important; gap: 12px !important; font-size: 21px !important; }
+    .dzo-hero-phone-txt { flex-direction: column !important; align-items: flex-start !important; text-align: left !important; gap: 4px !important; line-height: 1.3 !important; }
+    [style*="padding:96px 32px"] { padding-top: 44px !important; padding-bottom: 44px !important; padding-left: 20px !important; padding-right: 20px !important; }
+    #kontakt { padding-bottom: clamp(120px,14vw,260px) !important; }
   }
 </style>
 <script src="./image-slot.js"></script>
 </helmet>
 
-<div style="max-width:100%;overflow-x:hidden;">
+<div style="max-width:100%;overflow-x:clip;">
+
+  <!-- ============ FLOAT: WhatsApp + Viber ============ -->
+  <div style="position:fixed;right:20px;bottom:20px;z-index:900;display:flex;flex-direction:column;gap:12px;">
+    <a href="https://wa.me/38267123456" target="_blank" rel="noopener" aria-label="WhatsApp" style="width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,0.45);transition:transform .15s ease,box-shadow .15s ease;" style-hover="transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,0.55);">
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16.02 5.33c-5.87 0-10.64 4.76-10.64 10.63 0 1.87.49 3.7 1.42 5.31L5.33 26.67l5.53-1.45a10.6 10.6 0 0 0 5.15 1.31h.01c5.86 0 10.63-4.76 10.63-10.63 0-2.84-1.11-5.51-3.11-7.52a10.56 10.56 0 0 0-7.52-3.05zm0 19.4h-.01a8.8 8.8 0 0 1-4.49-1.23l-.32-.19-3.28.86.88-3.2-.21-.33a8.78 8.78 0 0 1-1.35-4.68c0-4.87 3.97-8.83 8.85-8.83a8.8 8.8 0 0 1 8.83 8.84c0 4.87-3.96 8.83-8.8 8.83zm4.85-6.61c-.27-.13-1.57-.78-1.81-.86-.24-.09-.42-.13-.6.13-.18.27-.69.86-.84 1.04-.16.18-.31.2-.58.07-.27-.13-1.12-.41-2.14-1.32-.79-.7-1.32-1.57-1.48-1.84-.16-.27-.02-.41.12-.55.12-.12.27-.31.4-.47.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.47-.07-.13-.6-1.45-.82-1.98-.22-.52-.44-.45-.6-.46l-.51-.01c-.18 0-.47.07-.71.34-.24.27-.93.91-.93 2.22 0 1.31.95 2.57 1.09 2.75.13.18 1.87 2.86 4.53 4.01.63.27 1.13.44 1.51.56.64.2 1.22.17 1.68.1.51-.08 1.57-.64 1.79-1.26.22-.62.22-1.15.16-1.26-.07-.11-.25-.18-.52-.31z"/></svg>
+    </a>
+    <a href="viber://chat?number=%2B38267123456" aria-label="Viber" style="width:56px;height:56px;border-radius:50%;background:#7360F2;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,0.45);transition:transform .15s ease,box-shadow .15s ease;" style-hover="transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,0.55);">
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M23.6 4.83c-.72-.66-3.62-2.77-10.09-2.8 0 0-7.62-.46-11.34 2.95C.1 7.04-.63 10.06.55 15.78c1.18 5.71 3.86 9.28 7.5 8.87v3.13c0 .38.45.56.71.28l2.86-3.13c.6.05 1.2.08 1.82.08.19 0 .39 0 .58-.01 6.47-.03 9.37-2.14 10.09-2.8 4.02-3.68 3.28-13.65-.51-16.65-.62-.55-1.22-.99-2.4-1.99zm-1.06 15.53c-.61.56-3.06 2.4-8.62 2.42-.17.01-.33.01-.5.01-.53 0-1.05-.02-1.55-.07l-.4-.04-.28.29-1.9 2.08v-2.23l-.01-.62-.61-.11c-3.13-.36-5.4-3.42-6.42-8.38-1.02-4.94-.42-7.32 1.42-9 3.13-2.86 9.99-2.47 9.99-2.47 5.47.02 7.95 1.8 8.55 2.35 3.2 2.53 3.86 11.09.34 14.34zM13.4 6.9c-.29 0-.53.24-.53.53s.24.53.53.53c1.35 0 2.5.44 3.44 1.29.94.86 1.4 2.06 1.4 3.66 0 .29.24.53.53.53s.53-.24.53-.53c0-1.87-.57-3.36-1.73-4.44-1.16-1.05-2.6-1.57-4.17-1.57zm-4.32 1.4c-.34-.05-.68.06-.93.29l-.01.01-.72.72c-.24.24-.34.6-.25.94.32 1.24 1.03 3.03 2.53 4.53 1.5 1.5 3.29 2.21 4.53 2.53.34.09.7-.01.94-.25l.72-.72c.24-.25.35-.6.29-.94-.07-.4-.29-.98-1.03-1.32-.44-.2-1.06-.42-1.5-.42-.28 0-.5.09-.65.26-.13.15-.35.24-.55.13-.55-.3-1.15-.72-1.65-1.22-.5-.5-.92-1.1-1.22-1.65-.11-.2-.02-.42.13-.55.17-.15.26-.37.26-.65 0-.44-.22-1.06-.42-1.5-.31-.68-.83-.92-1.22-1.01zm4.28.65c-.29 0-.53.24-.53.53s.24.53.53.53c.79 0 1.35.22 1.75.65.4.44.6 1.02.6 1.79 0 .29.24.53.53.53s.53-.24.53-.53c0-1.02-.29-1.86-.88-2.5-.6-.65-1.44-.99-2.53-.99z"/></svg>
+    </a>
+  </div>
 
   <!-- ============ TOP BAR ============ -->
   <header style="position:sticky;top:0;z-index:50;background:rgba(14,14,15,0.92);backdrop-filter:blur(10px);border-bottom:1px solid #26292D;">
@@ -257,7 +272,9 @@
     <div style="max-width:1240px;margin:0 auto;padding:96px 32px;">
       <div style="font-family:'Barlow Semi Condensed';color:#F5B301;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:15px;margin-bottom:12px;">Recenzije</div>
       <h2 class="dzo-reveal" style="font-family:'Oswald';font-weight:700;font-size:clamp(34px,4vw,52px);text-transform:uppercase;margin:0 0 44px;letter-spacing:-0.5px;">Šta kažu klijenti</h2>
-      <div class="dzo-rev-mask" style="margin:0 -32px;padding:0 32px;">
+      <div class="dzo-rev-mask" style="overflow:hidden;padding:34px 0;">
+        <button type="button" class="dzo-rev-arrow dzo-rev-prev" aria-label="Prethodna recenzija">‹</button>
+        <button type="button" class="dzo-rev-arrow dzo-rev-next" aria-label="Sledeća recenzija">›</button>
         <div class="dzo-rev-track">
           <div class="dzo-rev-card" style="background:#0E0E0F;border:1px solid #2A2D31;border-radius:12px;padding:28px;box-shadow:inset 0 4px 18px rgba(0,0,0,0.9),inset 0 1px 3px rgba(0,0,0,0.95);">
             <div style="color:#F5B301;font-size:18px;margin-bottom:14px;">★★★★★</div>
@@ -374,8 +391,102 @@ class Component extends DCLogic {
     }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
     document.querySelectorAll('.dzo-reveal').forEach((el) => io.observe(el));
     this._io = io;
+    this._setupReviews();
   }
-  componentWillUnmount() { if (this._io) this._io.disconnect(); }
+  _setupReviews() {
+    const mask = document.querySelector('.dzo-rev-mask');
+    const track = mask && mask.querySelector('.dzo-rev-track');
+    if (!mask || !track) { this._revRaf = requestAnimationFrame(() => this._setupReviews()); return; }
+    let cards = Array.from(track.querySelectorAll('.dzo-rev-card'));
+    const uniques = cards.filter((c) => !c.hasAttribute('aria-hidden'));
+    const N = uniques.length;                // unique reviews
+    if (N < 1) return;
+    // rebuild the track with enough repeated sets that a seam never leaves a gap in the viewport
+    cards.slice(N).forEach((c) => c.remove());
+    const SETS = 4;
+    for (let s = 1; s < SETS; s++) { uniques.forEach((u) => { const cl = u.cloneNode(true); cl.setAttribute('aria-hidden', 'true'); track.appendChild(cl); }); }
+    cards = Array.from(track.querySelectorAll('.dzo-rev-card'));
+    const prev = mask.querySelector('.dzo-rev-prev');
+    const next = mask.querySelector('.dzo-rev-next');
+
+    // remember each card's original inline look so we can restore it
+    const orig = cards.map((c) => ({ transform: c.style.transform || '', opacity: c.style.opacity || '', boxShadow: c.style.boxShadow || '', borderColor: c.style.borderColor || '', zIndex: c.style.zIndex || '' }));
+
+    // deterministic geometry: one "step" = card width + gap; one "period" = a full set of N
+    const STEP = () => (cards[1].offsetLeft - cards[0].offsetLeft) || (cards[0].offsetWidth + 20);
+    const PERIOD = () => STEP() * N;
+    const base = () => mask.clientWidth / 2 - (cards[0].offsetLeft + cards[0].offsetWidth / 2); // pos centring card 0
+    const centerFor = (i) => base() - i * STEP();
+    const readPos = () => { const t = getComputedStyle(track).transform; return (!t || t === 'none') ? pos : new DOMMatrixReadOnly(t).m41; };
+
+    let focused = false, m = 1, pos = centerFor(1), last = 0, idleTimer = null;
+
+    const setTransform = (x, animate) => {
+      track.style.animation = 'none';
+      track.style.transition = animate ? 'transform .55s cubic-bezier(.2,.7,.2,1)' : 'none';
+      track.style.transform = 'translateX(' + x + 'px)';
+    };
+    const style = (on) => {
+      [prev, next].forEach((a) => { a.style.setProperty('opacity', on ? '1' : '0', 'important'); a.style.pointerEvents = on ? 'auto' : 'none'; a.style.transform = 'translateY(-50%) scale(' + (on ? 1 : 0.85) + ')'; });
+      cards.forEach((c, k) => {
+        const isA = on && k === m;
+        c.style.transform = isA ? 'scale(1.16)' : orig[k].transform;
+        c.style.opacity = on ? (isA ? '1' : '0.4') : orig[k].opacity;
+        c.style.zIndex = isA ? '3' : orig[k].zIndex;
+        c.style.boxShadow = isA ? '0 30px 60px rgba(0,0,0,0.65), 0 0 0 1px rgba(245,179,1,0.35), inset 0 4px 18px rgba(0,0,0,0.9)' : orig[k].boxShadow;
+        c.style.borderColor = isA ? '#F5B301' : orig[k].borderColor;
+      });
+    };
+    const snap = () => { const per = PERIOD(); while (m > N) { m -= N; pos += per; } while (m < 1) { m += N; pos -= per; } };
+
+    const enterFocus = (tnode) => {
+      if (!focused) { pos = readPos(); m = Math.round((base() - pos) / STEP()); }
+      if (tnode && tnode.closest) { const t = tnode.closest('.dzo-rev-card'); if (t) m = cards.indexOf(t); }
+      snap();
+      focused = true;
+      setTransform(pos, false); void track.offsetWidth;   // freeze where we are
+      pos = centerFor(m); setTransform(pos, true);          // ease to the chosen card
+      style(true); resetIdle();
+    };
+    const go = (dir) => {
+      if (!focused) { enterFocus(); return; }
+      const per = PERIOD();
+      if (dir > 0 && m >= N) { m -= N; pos += per; setTransform(pos, false); void track.offsetWidth; }
+      else if (dir < 0 && m <= 1) { m += N; pos -= per; setTransform(pos, false); void track.offsetWidth; }
+      m += dir; pos = centerFor(m); setTransform(pos, true); style(true); resetIdle();
+    };
+    const exitFocus = () => { if (!focused) return; focused = false; pos = readPos(); style(false); };
+    const resetIdle = () => { clearTimeout(idleTimer); idleTimer = setTimeout(exitFocus, 5000); };
+
+    // auto-scroll runs only while not focused; self-heals the transform each frame
+    const tick = (ts) => {
+      const dt = last ? Math.min((ts - last) / 1000, 0.05) : 0; last = ts;
+      if (!focused) {
+        const per = PERIOD();
+        pos += (per / 36) * dt;
+        if (per > 0) { while (pos <= base() - per) pos += per; while (pos > base()) pos -= per; }
+        setTransform(pos, false);
+      }
+      this._revRaf = requestAnimationFrame(tick);
+    };
+    this._revRaf = requestAnimationFrame(tick);
+
+    mask.addEventListener('mouseenter', () => enterFocus());
+    mask.addEventListener('mousemove', () => { if (focused) resetIdle(); });
+    mask.addEventListener('mouseleave', () => exitFocus());
+    mask.addEventListener('touchstart', (e) => enterFocus(e.target), { passive: true });
+    mask.addEventListener('touchmove', () => { if (focused) resetIdle(); }, { passive: true });
+    document.addEventListener('touchstart', (e) => { if (focused && !mask.contains(e.target)) exitFocus(); }, { passive: true });
+    prev.addEventListener('click', (e) => { e.stopPropagation(); go(-1); });
+    next.addEventListener('click', (e) => { e.stopPropagation(); go(1); });
+
+    this._revCleanup = () => { clearTimeout(idleTimer); };
+  }
+  componentWillUnmount() {
+    if (this._io) this._io.disconnect();
+    if (this._revRaf) cancelAnimationFrame(this._revRaf);
+    if (this._revCleanup) this._revCleanup();
+  }
   renderVals() {
     const companyName = this.props.companyName ?? 'DŽO';
     const phone = this.props.phone ?? '+382 67 123 456';
